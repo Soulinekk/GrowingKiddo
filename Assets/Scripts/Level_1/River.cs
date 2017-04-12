@@ -5,37 +5,35 @@ using UnityEngine;
 public class River : MonoBehaviour {
 
     #region Viarables
-    private GameObject riverMainPart;
-    private GameObject riverSecondPart;
+    private GameObject[] riverParts;
     public Material waterMaterial;
 
 #endregion
-
-    // Use this for initialization
+    
     void Start () {
 
-        riverMainPart = transform.GetChild(1).gameObject;
-        riverSecondPart = transform.GetChild(2).gameObject;
-        Debug.Log("Delete 2 lines below");
-        Stage_1();
-        Stage_2();
+        riverParts = new GameObject[transform.childCount];
+        riverParts[0] = gameObject.transform.GetChild(0).gameObject;                        // River bigger part
+        riverParts[1] = gameObject.transform.GetChild(1).gameObject;                        // River smaller part
+        riverParts[2] = transform.GetChild(2).gameObject;                                   // Waterfall
 	}
 	
-	// Update is called once per frame
 	void Update () {
 		
 	}
 
     public void Stage_1()
     {
-        riverMainPart.transform.position = new Vector3(-0.1280411f, 2.41f, -0.36f);
-        riverMainPart.GetComponent<Renderer>().material = waterMaterial;
+        
+        riverParts[0].transform.position = new Vector3(-0.1280411f, -0.66f, -0.3624908f);
+        riverParts[0].GetComponent<Renderer>().material = waterMaterial;
     }
 
     public void Stage_2()
     {
-        riverSecondPart.transform.position = new Vector3(-2.475322f, 2.83f, -10.70798f);
-        riverSecondPart.GetComponent<Renderer>().material = waterMaterial;
-        riverSecondPart.transform.rotation = Quaternion.Euler(-89.48f, 0f, 0f);
+        riverParts[1].transform.position = new Vector3(-2.72287f, -0.26f, -10.24156f);
+        riverParts[1].GetComponent<Renderer>().material = waterMaterial;
+        riverParts[1].transform.rotation = Quaternion.Euler(-89.19f, 0f, 0f);
+        riverParts[2].SetActive(true);
     }
 }
