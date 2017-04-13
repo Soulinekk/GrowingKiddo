@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class River : MonoBehaviour {
+public class River_Behaviour : MonoBehaviour {
 
     #region Viarables
-    private GameObject[] riverParts;
+    public GameObject[] riverParts;
     public Material waterMaterial;
 
-#endregion
-    
+    #endregion
+
+
 
     public void Stage_1()
     {

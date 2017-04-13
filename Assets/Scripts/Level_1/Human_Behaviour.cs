@@ -15,4 +15,14 @@ public class Human_Behaviour : MonoBehaviour {
     {
 
     }
+
+    public void PassBridgeWin()
+    {
+
+    }
+
+    public void PassBridgeLose()
+    {
+
+    }
 }
