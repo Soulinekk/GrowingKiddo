@@ -10,17 +10,6 @@ public class River : MonoBehaviour {
 
 #endregion
     
-    void Start () {
-
-        riverParts = new GameObject[transform.childCount];
-        riverParts[0] = gameObject.transform.GetChild(0).gameObject;                        // River bigger part
-        riverParts[1] = gameObject.transform.GetChild(1).gameObject;                        // River smaller part
-        riverParts[2] = transform.GetChild(2).gameObject;                                   // Waterfall
-	}
-	
-	void Update () {
-		
-	}
 
     public void Stage_1()
     {
