@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GM_Level_1 : MonoBehaviour {
     
@@ -37,8 +38,20 @@ public class GM_Level_1 : MonoBehaviour {
 #endregion
 
     public GameObject[] _buttons;                                                                           // UI Buttons
-    
 
+
+    private void Start()
+    {
+        LvlInfo.fishes_eaten = false;
+        LvlInfo.stageFinished = true;
+        LvlInfo.river_lvl = -1;
+        LvlInfo.trees_lvl = -1;
+        LvlInfo.bear_lvl = -1;
+        LvlInfo.wolfs_lvl = -1;
+        LvlInfo.fishes_lvl = -1;
+        LvlInfo.human_lvl = -1;
+        LvlInfo.bridge_lvl = -1;
+    }
 
 
     #region UI Buttons Behaviour
@@ -115,7 +128,6 @@ public class GM_Level_1 : MonoBehaviour {
     }
 
     #region On new stage behaviour
-
     void HumanBehaviour()
     {
         if (LvlInfo.human_lvl == 0)
@@ -141,7 +153,7 @@ public class GM_Level_1 : MonoBehaviour {
             human.GetComponent<Human_Behaviour>().BuildBridge();
             Destroy(active_Trees_Parent_Object.transform.GetChild(1).gameObject);
             Destroy(active_Trees_Parent_Object.transform.GetChild(0).gameObject);
-            LvlInfo.human_lvl = 2; 
+            LvlInfo.human_lvl = 2;
             LvlInfo.bridge_lvl = 1;
         }
         else if (LvlInfo.bridge_lvl == 1 && LvlInfo.human_lvl == 2)
@@ -161,7 +173,7 @@ public class GM_Level_1 : MonoBehaviour {
             // if bear or wolf
         }
 
-        FishedBehaviour();
+        FishesBehaviour();
     }
 
     void RiverBehaviour()
@@ -180,7 +192,7 @@ public class GM_Level_1 : MonoBehaviour {
         TreesBehaviour();
     }
 
-    void FishedBehaviour()
+    void FishesBehaviour()
     {
         switch (LvlInfo.fishes_lvl)
         {
@@ -280,6 +292,16 @@ public class GM_Level_1 : MonoBehaviour {
             wolfs.SetActive(true);
             LvlInfo.wolfs_lvl = 1;
         }
+        else if(LvlInfo.wolfs_lvl == 1)
+        {
+            wolfs.GetComponent<Wolfs_Behaviour>().SecondStage();
+            LvlInfo.wolfs_lvl = 2;
+        }
+        else if(LvlInfo.wolfs_lvl == 2)
+        {
+            wolfs.GetComponent<Wolfs_Behaviour>().FirstStage();
+            LvlInfo.wolfs_lvl = 2;
+        }
 
 
     }
@@ -343,9 +365,31 @@ public class GM_Level_1 : MonoBehaviour {
 
             case 2:
 
+                #region Case 2: Bear_Lvl == 2
+                if(LvlInfo.human_lvl == 4)
+                {
+                    LvlInfo.stageFinished = false;
 
-
+                    bear.GetComponent<Bear_Behaviour>().BearAttackHuman(2);
+                    LvlInfo.bear_lvl = 7;
+                }
+                else if(LvlInfo.fishes_lvl == 2)
+                {
+                    bear.GetComponent<Bear_Behaviour>().BearGoingForFishes(2);
+                    LvlInfo.bear_lvl = 5;
+                }
+                else
+                {
+                    bear.GetComponent<Bear_Behaviour>().BearThirdStage();
+                    LvlInfo.bear_lvl = 3;
+                    if(LvlInfo.wolfs_lvl == 1)
+                    {
+                        wolfs.GetComponent<Wolfs_Behaviour>().SecondStage();
+                        LvlInfo.wolfs_lvl = 2;
+                    }
+                }
                 break;
+                #endregion
 
             case 3:
 
@@ -354,8 +398,10 @@ public class GM_Level_1 : MonoBehaviour {
 
         WolfsBehaviour();
     }
-    
 #endregion
 
-
+    public void OnRetryButtonPress()
+    {
+        SceneManager.LoadSceneAsync(0);
+    }
 }

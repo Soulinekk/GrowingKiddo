@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Wolfs_Behaviour : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    private int firstStage = Animator.StringToHash("FirstStage");
+    private int secondStage = Animator.StringToHash("SecondStage");
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -13,4 +16,21 @@ public class Wolfs_Behaviour : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void FirstStage()
+    {
+        Animator anim = this.GetComponent<Animator>();
+        anim.SetTrigger(firstStage);
+    }
+
+    public void SecondStage()
+    {
+        Animator anim = this.GetComponent<Animator>();
+        anim.SetTrigger(secondStage);
+    }
+
+    public void ThirdStage()  // do i even need this one?
+    {
+        Debug.Log("Wolfs_Third_Stage animation");
+    }
 }
