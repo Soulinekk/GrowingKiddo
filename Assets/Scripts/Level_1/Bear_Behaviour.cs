@@ -16,7 +16,7 @@ public class Bear_Behaviour : MonoBehaviour
                 break;
 
             case 2:
-                Debug.Log("BearAttackHuman stage 1");
+                Debug.Log("BearAttackHuman stage 2");
                 break;
         }
     }
@@ -32,7 +32,7 @@ public class Bear_Behaviour : MonoBehaviour
             case 2:
 
                 Debug.Log("BearAttackWolfs stage 2");
-
+                BearSecondStage();
                 break;
         }
     }
@@ -47,11 +47,21 @@ public class Bear_Behaviour : MonoBehaviour
                 break;
 
             case 2:
-                Debug.Log("BearGoingForFishes stage 1");
+                Debug.Log("BearGoingForFishes stage 2");
                 break;
             case 3:
-                Debug.Log("BearGoingForFishes stage 1");
+                Debug.Log("BearGoingForFishes stage 3");
                 break;
         }
+    }
+
+    public void BearSecondStage()
+    {
+        Debug.Log("TODO: Bear_Second_Stage Animation");
+    }
+
+    public void BearThirdStage()
+    {
+        Debug.Log("TODO: Bear_Third_Stage Animation");
     }
 }

@@ -10,6 +10,8 @@ public class GM_Level_1 : MonoBehaviour {
         public static int stage = 0;
         public static bool stageFinished = true;                                                            // Checking if current animations and interactions had finished
 
+        public static bool fishes_eaten = false;
+
         #region Levels of things
         public static int river_lvl = -1;
         public static int trees_lvl = -1;
@@ -109,23 +111,25 @@ public class GM_Level_1 : MonoBehaviour {
 
     void StageStartup()
     {
-        HumanBehaviour();
-        FishedBehaviour();
-        TreesBehaviour();
-        RiverBehaviour();
-        WolfsBehaviour();
-        Bearbehaviour();
+        RiverBehaviour();                               // This stage call another, when its finished, and so on.
     }
 
     #region On new stage behaviour
 
     void HumanBehaviour()
     {
-        if (LvlInfo.trees_lvl == 3 && LvlInfo.human_lvl == 0)
+        if (LvlInfo.human_lvl == 0)
+        {
+            human.SetActive(true);
+            LvlInfo.human_lvl = 1;
+        }
+
+        if (LvlInfo.trees_lvl == 3 && LvlInfo.human_lvl == 1)
         {
             LvlInfo.stageFinished = false;
 
             human.GetComponent<Human_Behaviour>().ChopTrees();
+            active_Trees_Parent_Object.GetComponent<Tree_Behaviour>().TreesFallStage();
             LvlInfo.human_lvl = 1;
             LvlInfo.trees_lvl = 4;
         }
@@ -135,9 +139,9 @@ public class GM_Level_1 : MonoBehaviour {
 
             bridge.SetActive(true);
             human.GetComponent<Human_Behaviour>().BuildBridge();
-            Destroy(active_Trees_Parent_Object.transform.GetChild(0));
-            Destroy(active_Trees_Parent_Object.transform.GetChild(1));
-            LvlInfo.human_lvl = 2;
+            Destroy(active_Trees_Parent_Object.transform.GetChild(1).gameObject);
+            Destroy(active_Trees_Parent_Object.transform.GetChild(0).gameObject);
+            LvlInfo.human_lvl = 2; 
             LvlInfo.bridge_lvl = 1;
         }
         else if (LvlInfo.bridge_lvl == 1 && LvlInfo.human_lvl == 2)
@@ -145,7 +149,7 @@ public class GM_Level_1 : MonoBehaviour {
             LvlInfo.stageFinished = false;
 
             bridge.GetComponent<Bridge_Behaviour>().SecondStage();
-            Destroy(active_Trees_Parent_Object.transform.GetChild(2));
+            Destroy(active_Trees_Parent_Object.transform.GetChild(0).gameObject);
             LvlInfo.human_lvl = 3;
             LvlInfo.bridge_lvl = 2;
         }
@@ -156,6 +160,8 @@ public class GM_Level_1 : MonoBehaviour {
             LvlInfo.human_lvl = 4;
             // if bear or wolf
         }
+
+        FishedBehaviour();
     }
 
     void RiverBehaviour()
@@ -170,6 +176,8 @@ public class GM_Level_1 : MonoBehaviour {
             river.GetComponent<River_Behaviour>().Stage_2();
             LvlInfo.river_lvl = 2;
         }
+
+        TreesBehaviour();
     }
 
     void FishedBehaviour()
@@ -195,7 +203,7 @@ public class GM_Level_1 : MonoBehaviour {
                 break;
 
             case 1:
-                if(fishes != null)
+                if(LvlInfo.fishes_eaten == false)
                 {
                     LvlInfo.stageFinished = false;
 
@@ -205,7 +213,7 @@ public class GM_Level_1 : MonoBehaviour {
                 break;
 
             case 2:
-                if(fishes != null)
+                if(LvlInfo.fishes_eaten == false)
                 {
                     LvlInfo.stageFinished = false;
 
@@ -213,7 +221,20 @@ public class GM_Level_1 : MonoBehaviour {
                     LvlInfo.fishes_lvl = 3;
                 }
                 break;
+
+            case 3: 
+                if(LvlInfo.fishes_eaten == false)
+                {
+                    LvlInfo.stageFinished = false;
+
+                    fishes.GetComponent<Fishes_Behaviour>().ForthStage();
+                    Destroy(fishes, 2f);
+                    LvlInfo.fishes_lvl = 4;
+                }
+                break;
         }
+
+        BearBehaviour();
     }
 
     void TreesBehaviour()
@@ -248,16 +269,90 @@ public class GM_Level_1 : MonoBehaviour {
                 LvlInfo.trees_lvl = 3;
                 break;
         }
+
+        HumanBehaviour();
     }
 
     void WolfsBehaviour()
     {
+        if (LvlInfo.wolfs_lvl == 0)
+        {
+            wolfs.SetActive(true);
+            LvlInfo.wolfs_lvl = 1;
+        }
+
 
     }
 
-    void Bearbehaviour()
+    void BearBehaviour()
     {
+        if (LvlInfo.bear_lvl == 0)
+        {
+            bear.SetActive(true);
+            LvlInfo.bear_lvl = 1;
+        }
 
+        switch (LvlInfo.bear_lvl)
+        {
+            #region Case 1: Bear_Lvl == 1
+            case 1:
+                if (LvlInfo.fishes_lvl == 3)                                                            // bear lv == 1 && fishes lv == 3
+                {
+                    LvlInfo.stageFinished = false;
+
+                    bear.GetComponent<Bear_Behaviour>().BearGoingForFishes(3);
+                    LvlInfo.fishes_eaten = true;
+                    LvlInfo.bear_lvl = 6;
+                }
+                else if(LvlInfo.wolfs_lvl == 2)                                                         // Bear lv == 1 && wolfs lv == 2
+                {
+                    LvlInfo.stageFinished = false;
+
+                    bear.GetComponent<Bear_Behaviour>().BearAttackWolfs(2);
+                    LvlInfo.bear_lvl = 2;
+                    LvlInfo.wolfs_lvl = 3;
+                }
+
+                if (LvlInfo.human_lvl == 4)                                                             // Bear lv == (1 or 2) && Human lv == 4
+                {
+                    if(LvlInfo.bear_lvl == 1)
+                    {
+                        LvlInfo.stageFinished = false;
+
+                        bear.GetComponent<Bear_Behaviour>().BearAttackHuman(1);
+                        LvlInfo.bear_lvl = 7;
+                    }
+                    else if (LvlInfo.bear_lvl == 2)
+                    {
+                        LvlInfo.stageFinished = false;
+
+                        bear.GetComponent<Bear_Behaviour>().BearAttackHuman(2);
+                        LvlInfo.bear_lvl = 7;
+                    }
+                }
+
+                if (LvlInfo.bear_lvl == 1)
+                {
+                    LvlInfo.stageFinished = false;
+
+                    bear.GetComponent<Bear_Behaviour>().BearSecondStage();
+                    LvlInfo.bear_lvl = 2;
+                }
+                break;
+#endregion
+
+            case 2:
+
+
+
+                break;
+
+            case 3:
+
+                break;
+        }
+
+        WolfsBehaviour();
     }
     
 #endregion

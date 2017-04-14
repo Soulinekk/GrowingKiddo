@@ -6,6 +6,7 @@ public class Fishes_Behaviour : MonoBehaviour {
 
     private int thirdStage = Animator.StringToHash("ThirdStage");
     private int secondStage = Animator.StringToHash("SecondStage");
+    private int forthStage = Animator.StringToHash("ForthStage");
     private int deadSpawn = Animator.StringToHash("DeadSpawn");
 
     // Use this for initialization
@@ -28,6 +29,12 @@ public class Fishes_Behaviour : MonoBehaviour {
     {
         Animator anim = this.GetComponent<Animator>();
         anim.SetTrigger(thirdStage);
+    }
+
+    public void ForthStage()
+    {
+        Animator anim = this.GetComponent<Animator>();
+        anim.SetTrigger(forthStage);
     }
 
     public void SpawnWithoutRiver()

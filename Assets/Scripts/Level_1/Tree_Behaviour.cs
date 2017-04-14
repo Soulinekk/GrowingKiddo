@@ -51,6 +51,6 @@ public class Tree_Behaviour : MonoBehaviour {
     {
         yield return new WaitForSeconds(Random.Range(0f, 1f));
         Animator anim = tree.GetComponent<Animator>();
-        anim.SetTrigger(thirdStage);
+        anim.SetTrigger(fallStage);
     }
 }
