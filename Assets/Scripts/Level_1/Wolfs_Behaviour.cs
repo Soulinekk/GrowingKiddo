@@ -6,6 +6,7 @@ public class Wolfs_Behaviour : MonoBehaviour {
 
     private int firstStage = Animator.StringToHash("FirstStage");
     private int secondStage = Animator.StringToHash("SecondStage");
+    private int thirdStage = Animator.StringToHash("ThirdStage");
 
     // Use this for initialization
     void Start () {
@@ -29,8 +30,14 @@ public class Wolfs_Behaviour : MonoBehaviour {
         anim.SetTrigger(secondStage);
     }
 
-    public void ThirdStage()  // do i even need this one?
+    public void ThirdStage()  // do i even need this one? yes i do
     {
-        Debug.Log("Wolfs_Third_Stage animation");
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(thirdStage);
+    }
+
+    public void WolfsAttackingHuman()
+    {
+        Debug.Log("Wolfs attacing human, Game Over");
     }
 }

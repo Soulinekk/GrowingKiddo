@@ -5,63 +5,133 @@ using UnityEngine;
 public class Bear_Behaviour : MonoBehaviour
 {
 
+    private int secondStage = Animator.StringToHash("SecondStage");                                 // Its also Wolfs Attack animation
+    private int thirdStage = Animator.StringToHash("ThirdStage");                                   // Its also Wolfs Attack animation 
+    private int forthStage = Animator.StringToHash("ForthStage");
+    private int fifthStage = Animator.StringToHash("FifthStage");
+    private int sixthStage = Animator.StringToHash("SixhStage");
+    private int sixthToSecond = Animator.StringToHash("SixthToSecond");
+    private int fifthToSecond = Animator.StringToHash("FifthToSecond");
+    private int forthToThird = Animator.StringToHash("ForthToThird");
+    private int thirdToSecond = Animator.StringToHash("ThirdToSecond");
 
 
-    public void BearAttackHuman(int stage)
+    private int humanAttackFromFirstStage = Animator.StringToHash("Attack1");
+    private int humanAttackFromSecondStage = Animator.StringToHash("Attack2");
+
+    public void BearAttackHuman(int BearStance)
     {
-        switch (stage)
+        switch (BearStance)
         {
             case 1:
-                Debug.Log("BearAttackHuman stage 1");
+                AttackFromFirstStage();
                 break;
 
             case 2:
-                Debug.Log("BearAttackHuman stage 2");
+                AttackFromSecondStage();
                 break;
         }
     }
 
-    public void BearAttackWolfs(int stage)
+    public void BearAttackWolfs(int wolfsStage)
     {
-        switch (stage)
+        switch (wolfsStage)
         {
             case 1:
-                Debug.Log("BearAttackWolfs stage 1");
+                ThirdStage();
                 break;
 
             case 2:
-
-                Debug.Log("BearAttackWolfs stage 2");
-                BearSecondStage();
+                SecondStage();
                 break;
         }
     }
 
-    public void BearGoingForFishes(int stage)
+    public void BearGoingForFishes(int FishesStage)
     {
-        switch (stage)
+        switch (FishesStage)
         {
             case 1:
-
-                Debug.Log("BearGoingForFishes stage 1");
+                SixthStage();
                 break;
 
             case 2:
-                Debug.Log("BearGoingForFishes stage 2");
+                FifthStage();
                 break;
             case 3:
-                Debug.Log("BearGoingForFishes stage 3");
+                ForthStage();
                 break;
         }
     }
 
-    public void BearSecondStage()
+    public void SecondStage()
     {
-        Debug.Log("TODO: Bear_Second_Stage Animation");
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(secondStage);
     }
 
-    public void BearThirdStage()
+    public void ThirdStage()
     {
-        Debug.Log("TODO: Bear_Third_Stage Animation");
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(thirdStage);
+    }
+
+    public void ForthStage()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(forthStage);
+    }
+
+    public void FifthStage()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(fifthStage);
+    }
+
+    public void SixthStage()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(sixthStage);
+    }
+
+    public void SixthToSecond()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(sixthToSecond);
+    }
+
+    public void FifthToSecond()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(fifthToSecond);
+    }
+
+    public void ForthToThird()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(forthToThird);
+    }
+
+    public void ThirdToSecond()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(thirdToSecond);
+    }
+
+    public void AttackFromFirstStage()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(humanAttackFromFirstStage);
+    }
+
+    public void AttackFromSecondStage()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(humanAttackFromSecondStage);
+    }
+
+    public void GameOver()
+    {
+
     }
 }
