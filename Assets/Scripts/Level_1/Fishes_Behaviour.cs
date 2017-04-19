@@ -9,15 +9,6 @@ public class Fishes_Behaviour : MonoBehaviour {
     private int forthStage = Animator.StringToHash("ForthStage");
     private int deadSpawn = Animator.StringToHash("DeadSpawn");
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void SecondStage()
     {

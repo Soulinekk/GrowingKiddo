@@ -14,10 +14,9 @@ public class Bear_Behaviour : MonoBehaviour
     private int fifthToSecond = Animator.StringToHash("FifthToSecond");
     private int forthToThird = Animator.StringToHash("ForthToThird");
     private int thirdToSecond = Animator.StringToHash("ThirdToSecond");
-
-
     private int humanAttackFromFirstStage = Animator.StringToHash("Attack1");
     private int humanAttackFromSecondStage = Animator.StringToHash("Attack2");
+
 
     public void BearAttackHuman(int BearStance)
     {
@@ -128,10 +127,5 @@ public class Bear_Behaviour : MonoBehaviour
     {
         Animator anim = GetComponent<Animator>();
         anim.SetTrigger(humanAttackFromSecondStage);
-    }
-
-    public void GameOver()
-    {
-
     }
 }

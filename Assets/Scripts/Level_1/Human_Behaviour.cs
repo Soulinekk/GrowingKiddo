@@ -10,6 +10,7 @@ public class Human_Behaviour : MonoBehaviour {
     private int win = Animator.StringToHash("Win");
     private int death = Animator.StringToHash("Death");
 
+
     public void ChopTrees()
     {
         Animator anim = GetComponent<Animator>();

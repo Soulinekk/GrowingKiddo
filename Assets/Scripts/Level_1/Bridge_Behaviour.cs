@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bridge_Behaviour : MonoBehaviour {
-
-
-
+   
 
     public void SecondStage()
     {
