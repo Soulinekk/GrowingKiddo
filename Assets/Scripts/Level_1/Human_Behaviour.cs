@@ -17,18 +17,16 @@ public class Human_Behaviour : MonoBehaviour {
         anim.SetTrigger(Chopping);
     }
 
-    public void BuildBridge(int stageOfBuild)
+    public void BuildBridgePartOne()
     {
-        if(stageOfBuild == 1)
-        {
-            Animator anim = GetComponent<Animator>();
-            anim.SetTrigger(Bridge);
-        }
-        else
-        {
-            Animator anim = GetComponent<Animator>();
-            anim.SetTrigger(Bridge2);
-        }
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(Bridge);
+    }
+
+    public void BuildBridgePartTwo()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(Bridge2);
     }
 
     public void PassBridgeWin()

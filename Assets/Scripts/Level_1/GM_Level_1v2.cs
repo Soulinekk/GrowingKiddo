@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GM_Level_1v2 : MonoBehaviour {
     
-    public static class LvlInfo{
+    /*public static class LvlInfo{
         
         public static bool stageFinished = true;     
 
@@ -468,5 +468,5 @@ public class GM_Level_1v2 : MonoBehaviour {
     {
         Debug.Log("Game Over");
         lostScreen.SetActive(true);
-    }
+    }*/
 }

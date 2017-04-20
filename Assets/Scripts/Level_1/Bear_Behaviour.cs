@@ -9,46 +9,19 @@ public class Bear_Behaviour : MonoBehaviour
     private int thirdStage = Animator.StringToHash("ThirdStage");                                   // Its also Wolfs Attack animation 
     private int forthStage = Animator.StringToHash("ForthStage");
     private int fifthStage = Animator.StringToHash("FifthStage");
-    private int sixthStage = Animator.StringToHash("SixhStage");
+    private int sixthStage = Animator.StringToHash("SixthStage");
     private int sixthToSecond = Animator.StringToHash("SixthToSecond");
     private int fifthToSecond = Animator.StringToHash("FifthToSecond");
     private int forthToThird = Animator.StringToHash("ForthToThird");
     private int thirdToSecond = Animator.StringToHash("ThirdToSecond");
     private int humanAttackFromFirstStage = Animator.StringToHash("Attack1");
     private int humanAttackFromSecondStage = Animator.StringToHash("Attack2");
+    private int attack = Animator.StringToHash("Attack");
 
 
-    public void BearAttackHuman(int BearStance)
+    public void BearGoingForFishes(int bearStage)
     {
-        switch (BearStance)
-        {
-            case 1:
-                AttackFromFirstStage();
-                break;
-
-            case 2:
-                AttackFromSecondStage();
-                break;
-        }
-    }
-
-    public void BearAttackWolfs(int wolfsStage)
-    {
-        switch (wolfsStage)
-        {
-            case 1:
-                ThirdStage();
-                break;
-
-            case 2:
-                SecondStage();
-                break;
-        }
-    }
-
-    public void BearGoingForFishes(int FishesStage)
-    {
-        switch (FishesStage)
+        switch (bearStage)
         {
             case 1:
                 SixthStage();
@@ -127,5 +100,16 @@ public class Bear_Behaviour : MonoBehaviour
     {
         Animator anim = GetComponent<Animator>();
         anim.SetTrigger(humanAttackFromSecondStage);
+    }
+
+    public void SecondStageAttack()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(attack);
+    }
+
+    public void LevelUp()
+    {
+
     }
 }

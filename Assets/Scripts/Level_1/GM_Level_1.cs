@@ -9,20 +9,20 @@ public class GM_Level_1 : MonoBehaviour {
     public static int thinsToFinish;
 
     #region Levels of things
-    public int river_lvl;
-    public int trees_lvl;
-    public int bear_lvl;
-    public int wolfs_lvl;
-    public int fishes_lvl;
-    public int human_lvl;
-    public int bridge_lvl;
+    int river_lvl;
+    int trees_lvl;
+    int bear_lvl;
+    int wolfs_lvl;
+    int fishes_lvl;
+    int human_lvl;
+    int bridge_lvl;
 
-    public int r_lvl;
-    public int f_lvl;
-    public int t_lvl;
-    public int b_lvl;
-    public int w_lvl;
-    public int h_lvl;
+    int r_lvl;
+    int f_lvl;
+    int t_lvl;
+    int b_lvl;
+    int w_lvl;
+    int h_lvl;
     #endregion
 
     #region Things
@@ -42,6 +42,10 @@ public class GM_Level_1 : MonoBehaviour {
     public GameObject lostScreen;
     public GameObject[] _buttons;
     public GameObject[] _buttonsOrder;
+    public GameObject[] _objectsLevels;
+    public GameObject[] _scoreMaxedFrame;
+    public GameObject[] _lvlUpPlaceHolders;
+    public GameObject lvlUpText;
     private int order = 0;
 #endregion
 
@@ -60,12 +64,20 @@ public class GM_Level_1 : MonoBehaviour {
         wolfsAlreadyMoved = false;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            LevelUp(0);
+        }
+    }
+
     #region UI Buttons Behaviour
     public void OnItemActive_1()        // Tree
     {
         _buttons[0].GetComponent<Button>().interactable = false;
         order++;
-        _buttonsOrder[0].GetComponent<Text>().text = order.ToString();
+        _buttonsOrder[0].transform.GetChild(0).GetComponent<Text>().text = order.ToString();
         _buttonsOrder[0].SetActive(true);
         trees_lvl = 0;
         StageStartup();
@@ -75,7 +87,7 @@ public class GM_Level_1 : MonoBehaviour {
     {
         _buttons[1].GetComponent<Button>().interactable = false;
         order++;
-        _buttonsOrder[1].GetComponent<Text>().text = order.ToString();
+        _buttonsOrder[1].transform.GetChild(0).GetComponent<Text>().text = order.ToString();
         _buttonsOrder[1].SetActive(true);
         river_lvl = 0;
         StageStartup();
@@ -85,7 +97,7 @@ public class GM_Level_1 : MonoBehaviour {
     {
         _buttons[2].GetComponent<Button>().interactable = false;
         order++;
-        _buttonsOrder[2].GetComponent<Text>().text = order.ToString();
+        _buttonsOrder[2].transform.GetChild(0).GetComponent<Text>().text = order.ToString();
         _buttonsOrder[2].SetActive(true);
         wolfs_lvl = 0;
         StageStartup();
@@ -95,7 +107,7 @@ public class GM_Level_1 : MonoBehaviour {
     {
         _buttons[3].GetComponent<Button>().interactable = false;
         order++;
-        _buttonsOrder[3].GetComponent<Text>().text = order.ToString();
+        _buttonsOrder[3].transform.GetChild(0).GetComponent<Text>().text = order.ToString();
         _buttonsOrder[3].SetActive(true);
         bear_lvl = 0;
         StageStartup();
@@ -105,7 +117,7 @@ public class GM_Level_1 : MonoBehaviour {
     {
         _buttons[4].GetComponent<Button>().interactable = false;
         order++;
-        _buttonsOrder[4].GetComponent<Text>().text = order.ToString();
+        _buttonsOrder[4].transform.GetChild(0).GetComponent<Text>().text = order.ToString();
         _buttonsOrder[4].SetActive(true);
         human_lvl = 0;
         StageStartup();
@@ -115,7 +127,7 @@ public class GM_Level_1 : MonoBehaviour {
     {
         _buttons[5].GetComponent<Button>().interactable = false;
         order++;
-        _buttonsOrder[5].GetComponent<Text>().text = order.ToString();
+        _buttonsOrder[5].transform.GetChild(0).GetComponent<Text>().text = order.ToString();
         _buttonsOrder[5].SetActive(true);
         fishes_lvl = -1;
         StageStartup();
@@ -152,7 +164,7 @@ public class GM_Level_1 : MonoBehaviour {
             if(river_lvl != -1)
             {
                 fishes.SetActive(true);
-                fishes_lvl = 1;
+                fishes_lvl = 2;
                 f_lvl = 2;
             }
             else
@@ -161,26 +173,26 @@ public class GM_Level_1 : MonoBehaviour {
                 fishes.SetActive(true);
                 fishes.GetComponent<Fishes_Behaviour>().SpawnWithoutRiver();
                 Destroy(fishes, 2f);
-                fishes_lvl = 0;
+                fishes_lvl = 1;
                 f_lvl = 1;
             }
         }
         else switch (fishes_lvl)
         {
-            case 1:
-                fishes.GetComponent<Fishes_Behaviour>().SecondStage();
-                fishes_lvl = 2;
-                break;
-
             case 2:
-                fishes.GetComponent<Fishes_Behaviour>().ThirdStage();
+                fishes.GetComponent<Fishes_Behaviour>().SecondStage();
                 fishes_lvl = 3;
                 break;
 
             case 3:
+                fishes.GetComponent<Fishes_Behaviour>().ThirdStage();
+                fishes_lvl = 4;
+                break;
+
+            case 4:
                 fishes.GetComponent<Fishes_Behaviour>().ForthStage();
                 Destroy(fishes, 2f);
-                fishes_lvl = 4;
+                fishes_lvl = 5;
                 break;
         }
 
@@ -196,8 +208,7 @@ public class GM_Level_1 : MonoBehaviour {
             trees_lvl = 1;
             t_lvl = 1;
         }
-
-        if (trees_lvl == 1 && river_lvl == 2)
+        else if (trees_lvl == 1 && river_lvl == 2)
         {
             tilts.SetActive(false);
             bg_trees_Parent_Object.GetComponent<Tree_Behaviour>().TreesSecoundStage();
@@ -218,6 +229,144 @@ public class GM_Level_1 : MonoBehaviour {
 
     void BearBehaviour()
     {
+        if (bear_lvl == 0)
+        {
+            bear.SetActive(true);
+            bear_lvl = 1;
+            b_lvl = 1;
+        }
+
+        switch (bear_lvl)
+        {
+            #region Case 1:
+            case 1:
+                if(fishes_lvl == 4)
+                {
+                    bear.GetComponent<Bear_Behaviour>().BearGoingForFishes(1);
+                    bear_lvl = 6;
+                }
+                else if(wolfs_lvl == 2)
+                {
+                    bear.GetComponent<Bear_Behaviour>().SecondStage();
+                    bear.GetComponent<Bear_Behaviour>().Invoke("SecondStageAttack", 1f);
+                    Destroy(wolfs, 1.5f);
+                    bear_lvl = 2;
+                    wolfs_lvl = 3;
+                    b_lvl = 2;
+                    bear.GetComponent<Bear_Behaviour>().LevelUp();
+                }
+                else
+                {
+                    bear.GetComponent<Bear_Behaviour>().SecondStage();
+                    bear_lvl = 2;
+                }
+                break;
+            #endregion
+
+            #region Case 2:
+            case 2:
+                if (fishes_lvl == 3)
+                {
+                    bear.GetComponent<Bear_Behaviour>().BearGoingForFishes(2);
+                    bear_lvl = 5;
+                }
+                else if (wolfs_lvl == 1)
+                {
+                    wolfs.GetComponent<Wolfs_Behaviour>().SecondStage();
+                    wolfs_lvl = 2;
+                    bear.GetComponent<Bear_Behaviour>().ThirdStage();
+                    bear_lvl = 3;
+                }
+                else
+                {
+                    bear.GetComponent<Bear_Behaviour>().ThirdStage();
+                    bear_lvl = 3;
+                }
+                break;
+            #endregion
+
+            #region Case 3:
+            case 3:
+                if (fishes_lvl == 2)
+                {
+                    bear.GetComponent<Bear_Behaviour>().BearGoingForFishes(3);
+                    bear_lvl = 4;
+                }
+                else if(wolfs_lvl == 2)
+                {
+                    bear.GetComponent<Bear_Behaviour>().ThirdToSecond();
+                    bear.GetComponent<Bear_Behaviour>().Invoke("SecondStageAttack", 1.5f);
+                    Destroy(wolfs, 2f);
+                    bear_lvl = 2;
+                    b_lvl = 2;
+                    wolfs_lvl = 3;
+                }
+                else
+                {
+                    bear.GetComponent<Bear_Behaviour>().ThirdToSecond();
+                    bear_lvl = 2;
+                }
+                break;
+            #endregion
+
+            #region Case 4:
+            case 4:
+                if(wolfs_lvl == 1)
+                {
+                    wolfs.GetComponent<Wolfs_Behaviour>().SecondStage();
+                    wolfs_lvl = 2;
+                    bear.GetComponent<Bear_Behaviour>().ForthToThird();
+                    bear_lvl = 3;
+                }
+                else
+                {
+                    bear.GetComponent<Bear_Behaviour>().ForthToThird();
+                    bear_lvl = 3;
+                }
+                    break;
+                
+            #endregion
+
+            #region Case 5:
+            case 5:
+                if (wolfs_lvl == 2)
+                {
+                    bear.GetComponent<Bear_Behaviour>().FifthToSecond();
+                    bear.GetComponent<Bear_Behaviour>().Invoke("SecondStageAttack", 1f);
+                    Destroy(wolfs, 1.5f);
+                    bear_lvl = 2;
+                    wolfs_lvl = 3;
+                    b_lvl = 2;
+                    bear.GetComponent<Bear_Behaviour>().Invoke("LevelUp", 2.5f);
+                }
+                else
+                {
+                    bear.GetComponent<Bear_Behaviour>().FifthToSecond();
+                    bear_lvl = 2;
+                }
+                break;
+            #endregion
+
+            #region Case 6:
+            case 6:
+                if (wolfs_lvl == 2)
+                {
+                    bear.GetComponent<Bear_Behaviour>().SixthToSecond();
+                    bear.GetComponent<Bear_Behaviour>().Invoke("SecondStageAttack", 1f);
+                    Destroy(wolfs, 1.5f);
+                    bear_lvl = 2;
+                    wolfs_lvl = 3;
+                    b_lvl = 2;
+                    bear.GetComponent<Bear_Behaviour>().Invoke("LevelUp", 2.5f);
+                }
+                else
+                {
+                    bear.GetComponent<Bear_Behaviour>().SixthToSecond();
+                    bear_lvl = 2;
+                }
+                break;
+            #endregion
+        }
 
 
         WolfsBehaviour();
@@ -225,7 +374,30 @@ public class GM_Level_1 : MonoBehaviour {
 
     void WolfsBehaviour()
     {
-
+        if (wolfs_lvl == 0)
+        {
+            if(bear_lvl == 3)
+            {
+                wolfs.SetActive(true);
+                wolfs.GetComponent<Wolfs_Behaviour>().SecondStage();
+                wolfs_lvl = 2;
+                w_lvl = 1;
+            }
+            else
+            {
+                wolfs.SetActive(true);
+                wolfs_lvl = 1;
+                w_lvl = 1;
+            }
+        }
+        else if (wolfsAlreadyMoved == false)
+        {
+            if(wolfs_lvl == 1 && bear_lvl != 2)
+            {
+                wolfs.GetComponent<Wolfs_Behaviour>().SecondStage();
+                wolfs_lvl = 2;
+            }
+        }
 
         HumanBehaviour();
     }
@@ -236,9 +408,10 @@ public class GM_Level_1 : MonoBehaviour {
         {
             human.SetActive(true);
             human_lvl = 1;
+            h_lvl = 1;
         }
 
-        if (trees_lvl == 3)
+        if (trees_lvl == 3 && human_lvl > 0)
         {
             human.GetComponent<Human_Behaviour>().ChopTrees();
             active_Trees_Parent_Object.GetComponent<Tree_Behaviour>().TreesFallStage();
@@ -248,10 +421,10 @@ public class GM_Level_1 : MonoBehaviour {
         }
         else if (trees_lvl == 4)
         {
-            bridge.SetActive(true);
-            human.GetComponent<Human_Behaviour>().BuildBridge(1);
-            Destroy(active_Trees_Parent_Object.transform.GetChild(0).gameObject, 1f);
-            Destroy(active_Trees_Parent_Object.transform.GetChild(0).gameObject, 1f);
+            Invoke("LateBridgeActivate", 0.5f);
+            human.GetComponent<Human_Behaviour>().Invoke("BuildBridgePartOne", 0.4f);
+            Destroy(active_Trees_Parent_Object.transform.GetChild(1).gameObject, 0.3f);
+            Destroy(active_Trees_Parent_Object.transform.GetChild(0).gameObject, .3f);
             human_lvl = 3;
             bridge_lvl = 1;
             trees_lvl = 5;
@@ -259,21 +432,51 @@ public class GM_Level_1 : MonoBehaviour {
         }
         else if (trees_lvl == 5)
         {
-            human.GetComponent<Human_Behaviour>().BuildBridge(2);
-            bridge.GetComponent<Bridge_Behaviour>().SecondStage();
-            Destroy(active_Trees_Parent_Object.transform.GetChild(0).gameObject);
+            human.GetComponent<Human_Behaviour>().Invoke("BuildBridgePartTwo", 0f);
+            bridge.GetComponent<Bridge_Behaviour>().Invoke("SecondStage", 1f);
+            Destroy(active_Trees_Parent_Object.transform.GetChild(0).gameObject, .5f);
             human_lvl = 4;
             bridge_lvl = 2;
             trees_lvl = 6;
             t_lvl = 6;
         }
-        else if(trees_lvl == 6)
-        {
-            if (wolfs_lvl == 2 || bear_lvl == 2)
-            {
 
+        if (trees_lvl == 6)
+        {
+            if (bear_lvl == 2)
+            {
+                human.GetComponent<Human_Behaviour>().PassBridgeLose();
+                bear.GetComponent<Bear_Behaviour>().Invoke("AttackFromSecondStage", 3f);
+                Destroy(human, 4f);
+                human_lvl = 5;
+                Invoke("GameOver", 1.5f);
+            }
+            else if(wolfs_lvl == 2)
+            {
+                human.GetComponent<Human_Behaviour>().PassBridgeLose();
+                wolfs.GetComponent<Wolfs_Behaviour>().Invoke("WolfsAttackingHuman", 2f);
+                Destroy(human, 4f);
+                human_lvl = 5;
+                Invoke("GameOver", 2.5f);
+            }
+            else
+            {
+                human.GetComponent<Human_Behaviour>().Invoke("PassBridgeWin", 1f);
+                human_lvl = 6;
+                h_lvl = 2;
+                Invoke("Win", 3.3f);
             }
         }
+
+        if(order == 6 && human_lvl < 4)
+        {
+            Invoke("GameOver", 1f);
+        }
+    }
+
+    void LateBridgeActivate()
+    {
+        bridge.SetActive(true);
     }
 
     public void OnRetryButtonPress()
@@ -281,15 +484,94 @@ public class GM_Level_1 : MonoBehaviour {
         SceneManager.LoadSceneAsync(0);
     }
 
-    public void GameOver()
+    void GameOver()
     {
         Debug.Log("Game Over");
         lostScreen.SetActive(true);
+        ShowScore();
     }
 
-    public void Win()
+    void Win()
     {
         Debug.Log("You have Won");
         wonScreen.SetActive(true);
+        ShowScore();
+    }
+
+    void ShowScore()
+    {
+        // Tree
+        if(t_lvl == 6)
+        {
+            _objectsLevels[0].GetComponent<Text>().text = t_lvl.ToString();
+            _scoreMaxedFrame[0].SetActive(true);
+            _objectsLevels[0].SetActive(true);
+        }
+        else
+        {
+            _objectsLevels[0].GetComponent<Text>().text = t_lvl.ToString();
+            _objectsLevels[0].SetActive(true);
+        }
+
+        // River
+        if(r_lvl == 2)
+        {
+            _objectsLevels[1].GetComponent<Text>().text = r_lvl.ToString();
+            _scoreMaxedFrame[1].SetActive(true);
+            _objectsLevels[1].SetActive(true);
+        }
+        else
+        {
+            _objectsLevels[1].GetComponent<Text>().text = r_lvl.ToString();
+            _objectsLevels[1].SetActive(true);
+        }
+
+        // Wolfs
+        _objectsLevels[2].GetComponent<Text>().text = w_lvl.ToString();
+        _objectsLevels[2].SetActive(true);
+        _scoreMaxedFrame[2].SetActive(true);
+
+        // Bear
+        if (b_lvl == 2)
+        {
+            _objectsLevels[3].GetComponent<Text>().text = b_lvl.ToString();
+            _scoreMaxedFrame[3].SetActive(true);
+            _objectsLevels[3].SetActive(true);
+        }
+        else
+        {
+            _objectsLevels[3].GetComponent<Text>().text = b_lvl.ToString();
+            _objectsLevels[3].SetActive(true);
+        }
+        // Human
+        if(h_lvl == 2)
+        {
+            _objectsLevels[4].GetComponent<Text>().text = h_lvl.ToString();
+            _scoreMaxedFrame[4].SetActive(true);
+            _objectsLevels[4].SetActive(true);
+        }
+        else
+        {
+            _objectsLevels[4].GetComponent<Text>().text = h_lvl.ToString();
+            _objectsLevels[4].SetActive(true);
+        }
+        // Fish
+        if(f_lvl == 2)
+        {
+            _objectsLevels[5].GetComponent<Text>().text = f_lvl.ToString();
+            _scoreMaxedFrame[5].SetActive(true);
+            _objectsLevels[5].SetActive(true);
+        }
+        else
+        {
+            _objectsLevels[5].GetComponent<Text>().text = f_lvl.ToString();
+            _objectsLevels[5].SetActive(true);
+        }
+    }
+
+    void LevelUp(int placeHolderNumber)
+    {
+        GameObject clone = Instantiate(lvlUpText, _lvlUpPlaceHolders[placeHolderNumber].transform);
+        Destroy(clone, 4f);
     }
 }
