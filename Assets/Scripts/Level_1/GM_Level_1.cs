@@ -514,9 +514,9 @@ public class GM_Level_1 : MonoBehaviour {
         bridge.SetActive(true);
     }
 
-    public void OnRetryButtonPress()
+    public void OnRetryButtonPress(int sceneToLoad)
     {
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     void GameOver()
