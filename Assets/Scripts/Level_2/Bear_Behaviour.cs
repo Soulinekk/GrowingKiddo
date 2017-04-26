@@ -5,7 +5,9 @@ using UnityEngine;
 public class Bear_Behaviour : MonoBehaviour
 {
 
-    private int secondStage = Animator.StringToHash("SecondStage");                                 // Its also Wolfs Attack animation
+
+
+    private readonly int secondStage = Animator.StringToHash("SecondStage");                                 // Its also Wolfs Attack animation
     private int thirdStage = Animator.StringToHash("ThirdStage");                                   // Its also Wolfs Attack animation 
     private int forthStage = Animator.StringToHash("ForthStage");
     private int fifthStage = Animator.StringToHash("FifthStage");
@@ -38,7 +40,7 @@ public class Bear_Behaviour : MonoBehaviour
 
     public void SecondStage()
     {
-        Animator anim = GetComponent<Animator>();
+        var anim = GetComponent<Animator>();
         anim.SetTrigger(secondStage);
     }
 

@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 public class GM_Level_1 : MonoBehaviour {
 
     public static int thinsToFinish;
 
-    #region Levels of things
+	#region Levels of things
     int river_lvl;
     int trees_lvl;
     int bear_lvl;
@@ -34,7 +35,7 @@ public class GM_Level_1 : MonoBehaviour {
     public GameObject fishes;
     public GameObject tilts;
     public GameObject bridge;
-#endregion
+	#endregion
 
     #region UI things
     public GameObject wonScreen;
@@ -48,7 +49,7 @@ public class GM_Level_1 : MonoBehaviour {
     private int order = 0;
 #endregion
 
-    private bool wolfsAlreadyMoved = false;
+    private bool wolfsAlreadyMoved;
 
     // Use this for initialization
     void Start () {
@@ -70,6 +71,7 @@ public class GM_Level_1 : MonoBehaviour {
         _buttonsOrder[0].GetComponent<Text>().text = order.ToString();
         trees_lvl = 0;
         StageStartup();
+
     }
 
     public void OnItemActive_2()        // River
@@ -412,7 +414,7 @@ public class GM_Level_1 : MonoBehaviour {
                 wolfs_lvl = 1;
                 w_lvl = 1;
                 _objectsLevels[2].GetComponent<Text>().text = w_lvl.ToString();
-                _scoreMaxedFrame[2].SetActive(true);
+	            _scoreMaxedFrame[2].SetActive(true);
                 StartCoroutine(LvlUpAfterTime(0.1f, 4));
             }
         }
