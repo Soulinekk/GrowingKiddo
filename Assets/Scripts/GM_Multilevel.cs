@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GM_Multilevel : MonoBehaviour {
 
-    public GameObject[] buttonsOfObjects;
+    public List<GameObject> buttonsOfObjects = new List<GameObject>();
+    public GameObject winScreen;
+    public GameObject loseScreen;
+    
+    private bool buttonsActive = true;
 
 	// Use this for initialization
 	void Start () {
@@ -18,30 +23,32 @@ public class GM_Multilevel : MonoBehaviour {
 		
 	}
 
-    public void LoadSceneById(int id)
+    public void LoadLevel(int level_id)
     {
-        SceneManager.LoadScene(id);
+        SceneManager.LoadScene(level_id);
     }
 
-    public void OnButtonPress()
+    public void CloseGame()
     {
-        GameObject.Find("Scene").GetComponent<Animator>().SetTrigger("NewStage");
+        Application.Quit();
     }
 
-    void ActiveButtons(bool active)
+    public void ActiveButtons()
     {
-        if(active == true)
+        if(buttonsActive == false)
         {
+            buttonsActive = true;
             foreach (GameObject button in buttonsOfObjects)
             {
-                button.SetActive(true);
+                button.GetComponent<Button>().interactable = true;
             }
         }
         else
         {
+            buttonsActive = false;
             foreach (GameObject button in buttonsOfObjects)
             {
-                button.SetActive(false);
+                button.GetComponent<Button>().interactable = false;
             }
         }
     }
@@ -54,11 +61,36 @@ public class GM_Multilevel : MonoBehaviour {
 
     public void GameOver()
     {
-
+        loseScreen.SetActive(true);
     }
 
     public void YouWin()
     {
+        winScreen.SetActive(false);
+    }
 
+    public void OnButtonPress(string triggerToActive)
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger(triggerToActive);
+        NewStageTrigger();
+    }
+
+    public void DisableButton(int id)
+    {
+        for (int i = 0; i < buttonsOfObjects.Count; i++)
+        {
+            if (buttonsOfObjects[i].GetComponent<ButtonsId>().id == id)
+            {
+                buttonsOfObjects[i].GetComponent<Button>().interactable = false;
+                buttonsOfObjects.RemoveAt(i);
+            }
+        }
+    }
+
+    public void NewStageTrigger()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger("NewStage");
     }
 }
