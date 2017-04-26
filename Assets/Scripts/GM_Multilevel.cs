@@ -90,6 +90,7 @@ public class GM_Multilevel : MonoBehaviour {
 
     public void NewStageTrigger()
     {
+        Debug.Log("!");
         Animator anim = GetComponent<Animator>();
         anim.SetTrigger("NewStage");
     }

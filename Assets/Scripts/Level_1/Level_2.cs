@@ -5,8 +5,12 @@ using UnityEngine;
 public class Level_2 : MonoBehaviour {
 
     public GameObject bgEnviroment;
-    public GameObject TreesActive;
-    public GameObject treesPassive;
+    public GameObject treesActiveParent;
+    public GameObject treesPassiveParent;
+    public MeshRenderer[] treesActiveChildrens;
+    public MeshRenderer[] treesPassiveChildrens;
+    public Material treeNormalMaterial;
+    public Material treeAutumnMaterial;
 
 
     // Use this for initialization
@@ -66,7 +70,20 @@ public class Level_2 : MonoBehaviour {
 
     public void TurnOnTrees()
     {
-        treesPassive.SetActive(true);
-        TreesActive.SetActive(true);
+        treesPassiveParent.SetActive(true);
+        treesActiveParent.SetActive(true);
+    }
+
+    public void TreesChangingColor()
+    {
+        foreach (MeshRenderer tree in treesActiveChildrens)
+        {
+            tree.material = treeAutumnMaterial;
+        }
+
+        foreach (MeshRenderer tree in treesPassiveChildrens)
+        {
+            tree.material = treeAutumnMaterial;
+        }
     }
 }
