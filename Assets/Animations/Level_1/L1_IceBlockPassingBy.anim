@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: L1_IcePassingBy
+  m_Name: L1_IceBlockPassingBy
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,52 +18,40 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: {x: 4.96, y: -26.95, z: -59.21}
-        inSlope: {x: 0, y: 0, z: 0}
-        outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 0.8333333
-        value: {x: 5.3560004, y: 26.067001, z: -79.091}
+        value: {x: 0, y: 0, z: -82.888}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Ice_Block
+    path: PlaceHolder
   m_PositionCurves:
   - curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: {x: -8.34, y: -0.33, z: 0.78}
+        value: {x: -6.2, y: -8.26, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.41666666
-        value: {x: -2.71, y: 1.53, z: 0.87}
-        inSlope: {x: 13.908001, y: 3.72, z: 0}
-        outSlope: {x: 13.908001, y: 3.72, z: 0}
+        time: 0.5
+        value: {x: 7.59, y: -5.94, z: -0.29}
+        inSlope: {x: 30.414545, y: 0, z: 0}
+        outSlope: {x: 30.414545, y: 0, z: 0}
         tangentMode: 0
       - serializedVersion: 2
-        time: 0.8333333
-        value: {x: 3.25, y: 2.77, z: -1.21}
-        inSlope: {x: 13.2, y: 2.6666667, z: -8.04}
-        outSlope: {x: 13.2, y: 2.6666667, z: -8.04}
-        tangentMode: 0
-      - serializedVersion: 2
-        time: 1.1666666
-        value: {x: 7.19, y: 3.53, z: -5.16}
+        time: 0.9166667
+        value: {x: 21.68, y: -7.54, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Ice_Block
+    path: PlaceHolder
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
@@ -75,14 +63,14 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 1794281713
+      path: 1960187363
       attribute: 1
       script: {fileID: 0}
       typeID: 4
       customType: 0
       isPPtrCurve: 0
     - serializedVersion: 2
-      path: 1794281713
+      path: 1960187363
       attribute: 4
       script: {fileID: 0}
       typeID: 4
@@ -94,7 +82,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.1666666
+    m_StopTime: 0.9166667
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -115,25 +103,19 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -8.34
+        value: -6.2
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.41666666
-        value: -2.71
-        inSlope: 13.908001
-        outSlope: 13.908001
+        time: 0.5
+        value: 7.59
+        inSlope: 30.414545
+        outSlope: 30.414545
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.8333333
-        value: 3.25
-        inSlope: 13.2
-        outSlope: 13.2
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 1.1666666
-        value: 7.19
+        time: 0.9166667
+        value: 21.68
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -141,7 +123,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -149,25 +131,19 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -0.33
+        value: -8.26
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.41666666
-        value: 1.53
-        inSlope: 3.72
-        outSlope: 3.72
+        time: 0.5
+        value: -5.94
+        inSlope: 0
+        outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.8333333
-        value: 2.77
-        inSlope: 2.6666667
-        outSlope: 2.6666667
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 1.1666666
-        value: 3.53
+        time: 0.9166667
+        value: -7.54
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -175,7 +151,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -183,25 +159,19 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0.78
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.41666666
-        value: 0.87
+        time: 0.5
+        value: -0.29
         inSlope: 0
         outSlope: 0
         tangentMode: 136
       - serializedVersion: 2
-        time: 0.8333333
-        value: -1.21
-        inSlope: -8.04
-        outSlope: -8.04
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 1.1666666
-        value: -5.16
+        time: 0.9166667
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -209,7 +179,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -217,13 +187,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 4.96
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 0.8333333
-        value: 5.3560004
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -231,7 +195,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.x
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -239,13 +203,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -26.95
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 0.8333333
-        value: 26.067001
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -253,7 +211,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.y
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -261,13 +219,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: -59.21
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 136
-      - serializedVersion: 2
-        time: 0.8333333
-        value: -79.091
+        value: -82.888
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -275,7 +227,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: localEulerAnglesRaw.z
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   m_EulerEditorCurves:
@@ -286,7 +238,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -296,7 +248,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -306,7 +258,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Ice_Block
+    path: PlaceHolder
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

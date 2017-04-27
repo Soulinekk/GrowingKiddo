@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: L1_Rocket_Passing_By
+  m_Name: L1_IceBlockMeltSendMsg_2
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -144,8 +144,8 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: 0
-    functionName: ShipTrigger
-    data: PassingBy
+    functionName: ActiveTriggerInBlockAnimator
+    data: MeltingWhole
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0

@@ -11,7 +11,10 @@ public class Level_2 : MonoBehaviour {
     public MeshRenderer[] treesPassiveChildrens;
     public Material treeNormalMaterial;
     public Material treeAutumnMaterial;
-
+    public GameObject tilt;
+    public Animator iceAnimator;
+    public Animator treesAnimator;
+    public Animator shipAnimator;
 
     // Use this for initialization
     void Start()
@@ -85,5 +88,30 @@ public class Level_2 : MonoBehaviour {
         {
             tree.material = treeAutumnMaterial;
         }
+    }
+
+    /// <summary>
+    /// Map tilt disapear on ice block fall
+    /// </summary>
+    public void OnTiltDestroy()
+    {
+        Destroy(tilt);
+    }
+    /// <summary>
+    /// Turn on ice block falling animation by ice block's script
+    /// </summary>
+    public void ActiveTriggerInBlockAnimator(string triggerName)
+    {
+        iceAnimator.SetTrigger(triggerName);
+    }
+
+    public void ActiveTriggerInTreesAnimator(string triggerName)
+    {
+        treesAnimator.SetTrigger(triggerName);
+    }
+
+    public void ShipTrigger(string triggerName)
+    {
+        shipAnimator.SetTrigger(triggerName);
     }
 }

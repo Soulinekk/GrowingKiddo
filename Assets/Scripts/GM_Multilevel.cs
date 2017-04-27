@@ -66,7 +66,7 @@ public class GM_Multilevel : MonoBehaviour {
 
     public void YouWin()
     {
-        winScreen.SetActive(false);
+        winScreen.SetActive(true);
     }
 
     public void OnButtonPress(string triggerToActive)
@@ -90,7 +90,6 @@ public class GM_Multilevel : MonoBehaviour {
 
     public void NewStageTrigger()
     {
-        Debug.Log("!");
         Animator anim = GetComponent<Animator>();
         anim.SetTrigger("NewStage");
     }
